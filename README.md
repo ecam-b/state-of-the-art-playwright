@@ -622,21 +622,25 @@ El framework genera múltiples formatos de reportes:
 
 ## Sobre el Autor
 
-**Ingeniero Senior de Automatización QA** con experiencia en:
+**SDET & Arquitecto de Automatización Híbrida | Backend Developer**
 
-- Construcción de frameworks de automatización de pruebas escalables desde cero
-- Implementación de pipelines CI/CD con testing automatizado
-- Establecimiento de mejores prácticas QA y estándares de equipo
-- Arquitectura de testing API y E2E
-- Ingeniería de performance y confiabilidad
+Especialista en diseñar **frameworks de automatización híbrida** que aseguran la integridad del negocio. Mi metodología combina la velocidad de las pruebas de API con la precisión de la UI para optimizar el Time-to-Market.
+
+### Experiencia y Logros
+
+- **Evolución Profesional**: Transición de QA Specialist a Backend Engineer, aplicando principios de Clean Code y arquitecturas escalables
+- **Validación de Contratos**: Implementación de schemas con Pydantic para blindar el backend contra breaking changes
+- **Optimización de Performance**: Reducción de tiempos de ejecución en más de un 70% mediante persistencia de sesiones y automatización en CI/CD
+- **Frameworks Desde Cero**: Construcción de soluciones de testing escalables con arquitectura modular y patrones de diseño
 
 ### Competencias Técnicas
 
-- **Lenguajes**: Python, TypeScript, JavaScript
-- **Frameworks**: Playwright, Selenium, Cypress, Pytest, Jest
-- **Prácticas**: TDD, BDD, Arquitectura Limpia, Patrones de Diseño
-- **Herramientas**: Docker, Git, GitHub Actions, Allure, Postman
-- **Dominios**: E-commerce, SaaS, Fintech, Healthcare
+- **Lenguajes**: Python, Java, JavaScript/TypeScript
+- **Backend**: FastAPI, Pydantic (validación de schemas)
+- **Testing**: Playwright, Selenium, Pytest, TestNG
+- **DevOps**: Docker, GitHub Actions, CI/CD Pipelines
+- **Herramientas**: Git, Allure Reports, Postman
+- **Especialización**: Integridad de APIs, Validación de Esquemas, Test Architecture
 
 ### Mi Enfoque
 
@@ -664,10 +668,9 @@ Estoy disponible para proyectos freelance incluyendo:
 
 ### Cómo Contactarme
 
-📧 **Email**: [Tu email aquí]  
-💼 **LinkedIn**: [Tu perfil de LinkedIn]  
-🌐 **Portfolio**: [Tu sitio web/portafolio]  
-💻 **GitHub**: [Tu perfil de GitHub]
+📧 **Email**: ec.angaritas@gmail.com  
+💼 **LinkedIn**: [linkedin.com/in/elian-camilo-angarita-sanguino](https://www.linkedin.com/in/elian-camilo-angarita-sanguino/)  
+💻 **GitHub**: [github.com/ecam-b](https://github.com/ecam-b)
 
 ---
 
