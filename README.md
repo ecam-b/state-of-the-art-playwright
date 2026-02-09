@@ -42,6 +42,7 @@ Este framework demuestra **ingeniería QA lista para producción** que entrega:
 - [Stack Tecnológico](#stack-tecnológico)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Primeros Pasos](#primeros-pasos)
+- [Ejecución con Docker](#ejecución-con-docker)
 - [Prácticas Estándar](#prácticas-estándar)
 - [Fixtures y Utilidades de Testing](#fixtures-y-utilidades-de-testing)
 - [Integración CI/CD](#integración-cicd)
@@ -227,6 +228,9 @@ class UserResponse(BaseModel):
 
 - **Python 3.9+**
 - **Git**
+- **Sistema Operativo**: Windows 10+ o macOS 11+
+
+> **Nota**: Este proyecto está optimizado y probado en Windows y macOS. La documentación se enfoca en estos sistemas operativos.
 
 ### 1. Clonar Repositorio
 
@@ -239,13 +243,23 @@ cd my-senior-start-kit
 
 ```bash
 python -m venv venv
+```
 
-# Windows
-venv\Scripts\activate
+**Activar entorno virtual:**
 
-# macOS/Linux
+```bash
+# Windows (PowerShell)
+venv\Scripts\Activate.ps1
+
+# Windows (CMD)
+venv\Scripts\activate.bat
+
+# macOS
 source venv/bin/activate
 ```
+
+> **Tip para Windows**: Si PowerShell da error de políticas de ejecución, ejecuta:  
+> `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
 ### 3. Instalar Dependencias
 
@@ -275,13 +289,120 @@ pytest --log-cli-level=INFO
 
 ### 5. Ver Reportes
 
-```bash
-# Reporte HTML
-open reports/report.html
+El framework genera automáticamente reportes en múltiples formatos después de cada ejecución.
 
-# Reporte Allure (requiere Allure CLI)
+#### Opción 1: Reporte HTML (Siempre Disponible)
+
+```bash
+# Windows
+start reports/report.html
+
+# macOS
+open reports/report.html
+```
+
+El reporte HTML incluye:
+- ✅ Resumen de tests (pasados/fallidos)
+- ✅ Screenshots automáticos en fallos
+- ✅ Logs de ejecución
+- ✅ Duración de cada test
+
+#### Opción 2: Reporte Allure con CLI
+
+**Prerequisito**: Tener Allure CLI instalado localmente
+
+**Instalar Allure CLI:**
+
+```bash
+# macOS (usando Homebrew)
+brew install allure
+
+# Windows (usando Scoop)
+scoop install allure
+```
+
+**Servir reporte:**
+
+```bash
 allure serve reports/allure-results
 ```
+
+> **Nota para Windows**: Si no tienes Scoop, puedes instalarlo desde [scoop.sh](https://scoop.sh) o descargar Allure manualmente desde [GitHub](https://github.com/allure-framework/allure2/releases).
+
+#### Opción 3: Reporte Allure con Docker (Recomendado)
+
+**Prerequisito**: Tener Docker instalado
+
+```bash
+# 1. Ejecutar tests (genera allure-results)
+pytest
+
+# 2. Levantar servidor Allure con Docker
+docker-compose up allure
+
+# 3. Abrir en navegador
+# http://localhost:5050/allure-docker-service/projects/default/reports/latest/index.html
+```
+
+**Ventajas del reporte Allure**:
+- 📊 Dashboards interactivos con gráficas
+- 📈 Análisis de tendencias entre ejecuciones
+- 🔍 Filtros avanzados por categorías/suites
+- 📸 Capturas de pantalla y videos embebidos
+- ⏱️ Métricas de performance detalladas
+- 🔄 Auto-refresh cada 15 segundos
+
+**Tip**: El reporte Allure con Docker no requiere instalar nada más que Docker, ideal para equipos y CI/CD.
+
+---
+
+## Ejecución con Docker
+
+### Opción Alternativa: Tests en Contenedores
+
+Si prefieres ejecutar los tests en un entorno aislado y reproducible, puedes usar Docker.
+
+**Prerequisito**: [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado (disponible para Windows y macOS)
+
+### 1. Construir la Imagen
+
+```bash
+# Construir imagen de tests
+docker build -t mis-tests-playwright .
+```
+
+### 2. Ejecutar Tests en Contenedor
+
+```bash
+# Ejecutar todos los tests
+docker-compose run --rm tests
+
+# Los reportes se generan en ./reports/ (montado como volumen)
+```
+
+### 3. Ver Reportes Allure
+
+```bash
+# Levantar servidor Allure
+docker-compose up allure
+
+# Acceder al reporte
+# http://localhost:5050/allure-docker-service/projects/default/reports/latest/index.html
+```
+
+### Ventajas de Usar Docker
+
+- ✅ **Entorno Consistente**: Mismas dependencias en todos los ambientes
+- ✅ **Sin Instalación Local**: No necesitas instalar Python ni Playwright
+- ✅ **Fácil CI/CD**: Mismo contenedor en local y en pipeline
+- ✅ **Aislamiento**: No afecta tu sistema operativo
+- ✅ **Portabilidad**: Comparte el entorno con tu equipo fácilmente
+
+### Configuración
+
+El proyecto incluye:
+- **Dockerfile**: Define la imagen con Python 3.12 + Playwright + Chromium
+- **docker-compose.yml**: Orquesta servicios de tests y reportes Allure
 
 ---
 
@@ -475,6 +596,7 @@ Este framework provee todo lo necesario para automatización QA profesional:
 - **Ejemplos Funcionales**: Tests reales contra APIs públicas y aplicaciones web
 - **Integración CI/CD**: Pipeline de GitHub Actions listo para desplegar
 - **Reportes Detallados**: Reportes HTML y Allure con screenshots y traces
+- **Containerización Docker**: Dockerfile y docker-compose para entornos reproducibles
 - **Escalabilidad**: Patrones probados en entornos empresariales
 
 ### Performance en el Mundo Real

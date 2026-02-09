@@ -72,3 +72,15 @@ class InventoryPage(BasePage):
         """Logout from application."""
         self.menu_button.click()
         self.logout_link.click()
+    
+    def clear_cart(self) -> "InventoryPage":
+        """
+        Clear all items from cart.
+        Removes all products that are currently in cart.
+        Returns self for method chaining.
+        """
+        products = self.get_product_cards()
+        for product in products:
+            if product.is_in_cart():
+                product.remove_from_cart()
+        return self

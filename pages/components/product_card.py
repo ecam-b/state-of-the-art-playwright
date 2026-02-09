@@ -63,7 +63,10 @@ class ProductCard:
         Check if product is already in cart.
         Returns True if Remove button is visible.
         """
-        return self.remove_button.is_visible()
+        try:
+            return self.remove_button.is_visible(timeout=1000)
+        except Exception:
+            return False
     
     def click_name(self) -> None:
         """Click product name to view details."""

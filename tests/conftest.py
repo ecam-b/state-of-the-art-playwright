@@ -50,9 +50,15 @@ def setup(authenticated_context: BrowserContext) -> Generator[Page, None, None]:
     """
     Setup authenticated page using session context.
     Creates new page with auth state already active.
+    Clears cart before each test to ensure isolation.
     """
     page = authenticated_context.new_page()
     page.goto("https://www.saucedemo.com/inventory.html")
+    
+    # Clear cart to ensure test isolation
+    from pages.inventory_page import InventoryPage
+    inventory_page = InventoryPage(page)
+    inventory_page.clear_cart()
     
     yield page
     
