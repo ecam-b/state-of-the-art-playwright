@@ -1,0 +1,8 @@
+pytest
+pytest-playwright
+pytest-html
+pytest-rerunfailures
+allure-pytest
+python-dotenv
+playwright==1.57.0
+pydantic>=2.0.0

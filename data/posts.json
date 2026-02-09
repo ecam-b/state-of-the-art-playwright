@@ -1,0 +1,24 @@
+{
+  "get_single_post": {
+    "post_id": 1,
+    "expected_user_id": 1
+  },
+  "get_user_posts": {
+    "user_id": 1,
+    "expected_min_posts": 1
+  },
+  "create_post": {
+    "title": "Test Post",
+    "body": "This is a test post created by automation",
+    "user_id": 1
+  },
+  "update_post": {
+    "post_id": 1,
+    "title": "Updated Test Post",
+    "body": "This post has been updated",
+    "user_id": 1
+  },
+  "delete_post": {
+    "post_id": 1
+  }
+}

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Servicio 1: Tus 13 tests de Playwright
+  tests:
+    image: mis-tests-playwright
+    env_file: .env
+    volumes:
+      - ./reports:/app/reports
+
+  # Servicio 2: El visualizador de Allure
+  allure:
+    image: frankescobar/allure-docker-service
+    user: root
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./reports/allure-results:/app/allure-results
+    environment:
+      - CHECK_RESULTS_EVERY_SECONDS=15

@@ -1,0 +1,47 @@
+name: Automated QA Tests
+
+# 1. Trigger: ¿Cuándo se activa esto?
+# Cada vez que hagas un push a la rama 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-execution:
+    # 2. El Runner: La computadora virtual (Ubuntu trae Docker preinstalado)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso A: Descargar tu código del repositorio
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # Paso B: Construir la imagen (Igual que en tu PC)
+      - name: Build de la imagen Docker
+        run: docker build -t mis-tests-playwright .
+
+      # Paso C: Correr los tests
+      # OJO: Aquí usamos secrets en lugar del archivo .env
+      - name: Ejecutar Tests de Playwright
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/reports:/app/reports \
+            -e BASE_URL=${{ vars.BASE_URL }} \
+            -e USER_EMAIL=${{ secrets.USER_EMAIL }} \
+            -e PASSWORD=${{ secrets.PASSWORD }} \
+            mis-tests-playwright \
+            pytest --html=reports/report.html --alluredir=reports/allure-results --tracing=retain-on-failure --output=reports/traces
+
+      # Paso D: Guardar el reporte (Artifacts)
+      # Usamos 'if: always()' para que se guarde el reporte AUNQUE fallen los tests
+      - name: Subir Reporte HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-qa
+          path: |
+            reports/
+            test-results/
+          retention-days: 5
